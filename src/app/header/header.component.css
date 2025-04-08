@@ -1,0 +1,20 @@
+div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  padding-left: 2rem;
+}
+
+h1 {
+  padding-left: 1.8rem;
+}
+
+.bx {
+  font-size: 300%;
+}
+
+header {
+  background: #2B50AA;
+  color: #F4EDED;
+}
