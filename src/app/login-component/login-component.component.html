@@ -1,0 +1,15 @@
+<div class="login-container">
+  <form class="login-form" [formGroup]="form">
+    <label>Email</label>
+    <input type="text" [formControlName]="'email'">
+
+    <label>Password</label>
+    <input type="password" [formControlName]="'password'">
+
+    <div class="button-div">
+    <button type="submit" class="login-button" (click)="login()">Login</button>
+    </div>
+  </form>
+
+  <p class="register-text">Don't have an account? <a class="register-link" routerLink="/register">Register</a></p>
+</div>
