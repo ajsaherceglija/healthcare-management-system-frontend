@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
+import {MOCK_USERS} from '../models/user.model';
+import {AuthService} from '../services/auth.service';
 
 @Component({
   selector: 'app-login-component',
@@ -14,7 +16,7 @@ import {RouterLink} from '@angular/router';
 export class LoginComponentComponent {
   form: FormGroup;
 
-  constructor(formBuilder: FormBuilder) {
+  constructor(formBuilder: FormBuilder, private authService: AuthService, private router: Router) {
     this.form = formBuilder.group({
       'email':[],
       'password':[]
@@ -22,6 +24,13 @@ export class LoginComponentComponent {
   }
 
   login() {
-    console.log(this.form.value);
+    const {email, password} = this.form.value;
+    const user = MOCK_USERS.find(u => u.email === email && u.password === password);
+    if (user) {
+      this.authService.setUser(user.uid);
+      this.router.navigate([`/user/${user.uid}`]);
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 }

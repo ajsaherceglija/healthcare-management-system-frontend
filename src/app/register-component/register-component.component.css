@@ -47,6 +47,7 @@ input {
   display: grid;
   grid-template-columns: 1fr 1fr;
   place-items: center;
+  gap: 32px;
 }
 
 .button-div {
@@ -69,6 +70,7 @@ input {
 
 .login-link {
   text-decoration: underline;
+  color: #291F1E;
 }
 
 .button {
