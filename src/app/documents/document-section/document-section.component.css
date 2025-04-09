@@ -6,6 +6,6 @@ h2 {
 
 .document-row {
   display: flex;
-  gap: 1.5rem;
+  gap: 4rem;
   margin-bottom: 5rem;
 }

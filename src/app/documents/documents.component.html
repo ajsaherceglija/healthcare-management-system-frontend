@@ -1,18 +1,21 @@
 <div class="container">
-  <div class="main-area">
     <main class="main">
+      <div *ngIf="user">
+        Welcome, {{ user.name }}
+      </div>
+
+
       <app-document-section
         [title]="'Finished documents'"
-        [documents]="['Lab analysis', 'Prescription']">
+        [documents]="finishedDocuments">
       </app-document-section>
 
       <app-document-section
         [title]="'My documents'"
-        [documents]="['Allergies']">
+        [documents]="myDocuments">
       </app-document-section>
 
       <a class="upload-link" href="#">+ Upload documents</a>
     </main>
-  </div>
 </div>
 
