@@ -1,8 +1,9 @@
 
 <app-header></app-header>
 
-<div class="container">
-  <div class="main-area">
+<div class="layout-container">
+  <app-navbar></app-navbar>
+  <div class="content-container">
     <main class="main">
       <app-document-section
         [title]="'Finished documents'"
@@ -15,9 +16,7 @@
       <app-document-section
         [title]="'My documents'"
         [documents]="[
-          { name: 'Allergies' }
-        ]"
-      ></app-document-section>
+          { name: 'Allergies' }]"></app-document-section>
 
       <a class="upload-link" href="#">+ Upload documents</a>
     </main>

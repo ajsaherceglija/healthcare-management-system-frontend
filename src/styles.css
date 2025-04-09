@@ -1,4 +1,18 @@
-body {
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+html, body {
+  height: 100%;
   margin: 0;
 }
 
+.mat-drawer-container {
+  height: 100vh;
+}
+
+.mat-sidenav {
+  width: 250px;
+}
+
+.content {
+  padding: 20px;
+}
