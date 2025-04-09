@@ -3,21 +3,16 @@
     <main class="main">
       <app-document-section
         [title]="'Finished documents'"
-        [documents]="[
-          { name: 'Lab analysis' },
-          { name: 'Prescription' }
-        ]"
-      ></app-document-section>
+        [documents]="['Lab analysis', 'Prescription']">
+      </app-document-section>
 
       <app-document-section
         [title]="'My documents'"
-        [documents]="[
-          { name: 'Allergies' }
-        ]"
-      ></app-document-section>
+        [documents]="['Allergies']">
+      </app-document-section>
 
       <a class="upload-link" href="#">+ Upload documents</a>
     </main>
   </div>
 </div>
-<router-outlet />
+
