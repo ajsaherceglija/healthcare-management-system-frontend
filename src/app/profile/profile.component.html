@@ -1,0 +1,39 @@
+<mat-card  class="profile-card" *ngIf="user">
+  <mat-card-header class="profile-header">
+    <div class="profile-avatar">
+      <mat-icon>person</mat-icon>
+    </div>
+    <mat-card-title>{{ user.name }}</mat-card-title>
+    <mat-card-subtitle>{{ user.role | uppercase }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content class="profile-details">
+    <div class="detail-row">
+      <span class="detail-label">Patient ID:</span>
+      <span>{{ user.uid }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Email:</span>
+      <span>{{ user.email }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Phone:</span>
+      <span>{{ user.phone }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Address:</span>
+      <span>{{ user.address }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">City:</span>
+      <span>{{ user.city }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Date of Birth:</span>
+      <span>{{ user.DOB | date: 'dd MMMM yyyy' }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Blood Group:</span>
+      <span>{{ user.blood_group }}</span>
+    </div>
+  </mat-card-content>
+</mat-card>
