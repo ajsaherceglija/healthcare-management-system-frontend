@@ -1,0 +1,32 @@
+<div class="navbar-container">
+  <mat-nav-list>
+    <div class="navbar">
+      <a mat-list-item [routerLink]="['/user', userId]">
+        <mat-icon matListItemIcon>dashboard</mat-icon>
+        <span>Dashboard</span>
+      </a>
+
+      <a mat-list-item [routerLink]="['/appointments', userId]">
+        <mat-icon matListItemIcon>event</mat-icon>
+        <span>Appointments</span>
+      </a>
+
+
+      <a mat-list-item [routerLink]="['/documents', userId]">
+        <mat-icon matListItemIcon>folder</mat-icon>
+        <span>Documents</span>
+      </a>
+
+      <a mat-list-item *ngIf="isDoctor" [routerLink]="['/patients', userId]">
+        <mat-icon matListItemIcon>people</mat-icon>
+        <span>My Patients</span>
+      </a>
+    </div>
+
+    <mat-list-item class="logout" (click)="logout()">
+      <mat-icon matListItemIcon>logout</mat-icon>
+      <span>Log Out</span>
+    </mat-list-item>
+  </mat-nav-list>
+
+</div>

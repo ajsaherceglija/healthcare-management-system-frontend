@@ -1,0 +1,61 @@
+.navbar-container {
+  display: flex;
+  justify-content: space-around;
+  height: 100vh;
+  background-color: rgba(43, 80, 170, 0.2);
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  color: #291F1E;
+}
+
+mat-nav-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 5%;
+}
+
+mat-nav-list a {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+mat-nav-list a:hover {
+  background-color: #2B50AA;
+}
+
+mat-nav-list a span{
+  font-size: 18px;
+  color: #291F1E;
+  font-family: Inter;
+}
+
+mat-nav-list a:hover span,
+  a:hover mat-icon,
+  mat-list-item:hover mat-icon,
+  mat-list-item:hover span
+  {
+  color: #F4EDED !important;
+}
+
+::ng-deep .logout mat-icon{
+  margin-right: 18% !important;
+}
+
+::ng-deep .logout {
+  padding: 10px !important;
+}
+
+::ng-deep mat-nav-list mat-icon {
+  font-size: 25px !important;
+  color: #291F1E !important;
+}
+
+::ng-deep mat-nav-list span{
+  font-size: 18px !important;
+  color: #291F1E !important;
+  font-family: Inter;
+}
+
+::ng-deep .logout:hover{
+  background-color: #2B50AA !important;
+}
