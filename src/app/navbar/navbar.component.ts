@@ -28,6 +28,6 @@ export class NavbarComponent implements OnInit{
     this.authService.logout();
 
     // Redirect the user to the login page (or another page)
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
   }
 }

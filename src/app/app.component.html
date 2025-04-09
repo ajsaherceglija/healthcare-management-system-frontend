@@ -2,26 +2,11 @@
 <app-header></app-header>
 
 <div class="layout-container">
-  <app-navbar></app-navbar>
+  <app-navbar *ngIf="showNavbar"></app-navbar>
   <div class="content-container">
-    <main class="main">
-      <app-document-section
-        [title]="'Finished documents'"
-        [documents]="[
-          { name: 'Lab analysis' },
-          { name: 'Prescription' }
-        ]"
-      ></app-document-section>
-
-      <app-document-section
-        [title]="'My documents'"
-        [documents]="[
-          { name: 'Allergies' }]"></app-document-section>
-
-      <a class="upload-link" href="#">+ Upload documents</a>
-    </main>
+    <router-outlet></router-outlet>
   </div>
 </div>
-<router-outlet />
+
 
 

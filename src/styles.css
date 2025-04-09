@@ -1,8 +1,20 @@
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
 
-html, body {
-  height: 100%;
+/* You can add global styles to this file, and also import other style files */
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: Inter, sans-serif;
+  background-color: #F4EDED;
+  height: 100%;
 }
 
 .mat-drawer-container {
@@ -16,3 +28,5 @@ html, body {
 .content {
   padding: 20px;
 }
+
+
