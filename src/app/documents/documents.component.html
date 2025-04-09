@@ -1,10 +1,5 @@
 <div class="container">
     <main class="main">
-      <div *ngIf="user">
-        Welcome, {{ user.name }}
-      </div>
-
-
       <app-document-section
         [title]="'Finished documents'"
         [documents]="finishedDocuments">
