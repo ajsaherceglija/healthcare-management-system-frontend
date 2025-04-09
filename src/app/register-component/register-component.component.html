@@ -1,0 +1,56 @@
+<div class="register-container">
+  <form [formGroup]="form">
+    <div *ngIf="step === 1">
+    <div class="inputs-div">
+      <div class="inputs-child">
+        <label>First Name</label>
+        <input type="text" [formControlName]="'fname'">
+        <label>Last Name</label>
+        <input type="text" [formControlName]="'lname'">
+        <label>Gender</label>
+        <input type="text" [formControlName]="'gender'">
+      </div>
+      <div class="inputs-child border-div">
+        <label>Email</label>
+        <input type="text" [formControlName]="'email'">
+        <label>Password</label>
+        <input type="password" [formControlName]="'password'">
+        <label>Confirm Password</label>
+        <input type="password" [formControlName]="'confirmPassword'">
+      </div>
+    </div>
+
+      <div class="button-div">
+        <button type="button" class="next-button" (click)="nextStep()">Next</button>
+      </div>
+    </div>
+
+    <div *ngIf="step === 2">
+      <div class="inputs-div">
+        <div class="inputs-child">
+          <label>Address</label>
+          <input type="text" [formControlName]="'address'">
+          <label>City</label>
+          <input type="text" [formControlName]="'city'">
+          <label>Phone Number</label>
+          <input type="text" [formControlName]="'phoneNumber'">
+        </div>
+        <div class="inputs-child">
+          <label>Date of Birth</label>
+          <input type="text" [formControlName]="'dob'">
+          <label>Blood Type</label>
+          <input type="text" [formControlName]="'bloodType'">
+          <label>JMBG</label>
+          <input type="text" [formControlName]="'jmbg'">
+        </div>
+      </div>
+
+      <div class="buttons-div">
+        <button type="button" class="button" (click)="previousStep()">Back</button>
+        <button type="submit" class="button" (click)="register()">Register</button>
+      </div>
+    </div>
+  </form>
+
+  <p class="login-text">Already have an account? <a class="login-link" routerLink="/">Sign in.</a></p>
+</div>

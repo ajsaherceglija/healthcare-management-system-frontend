@@ -3,7 +3,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {AuthService} from '../services/auth.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {DatePipe, NgIf, UpperCasePipe} from '@angular/common';
 import {User} from '../models/user.model';
 
@@ -24,7 +24,7 @@ import {User} from '../models/user.model';
 export class ProfileComponent implements OnInit{
   public user!: User;
 
-  constructor(private authService: AuthService, private route: ActivatedRoute) {}
+  constructor(private authService: AuthService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -32,7 +32,7 @@ export class ProfileComponent implements OnInit{
       if (id) {
         this.authService.setUser(id);
         this.loadUserData(id);
-      }
+      } 
     });
   }
 
@@ -40,6 +40,9 @@ export class ProfileComponent implements OnInit{
     const userData = this.authService.getUserById(uid);
     if (userData) {
       this.user = userData;
+    }
+    else {
+      this.router.navigate(['/']);
     }
   }
 }
