@@ -1,8 +1,10 @@
-<app-topbar-component></app-topbar-component>
+<app-header></app-header>
 
 
-<app-login-component></app-login-component>
-<!--
-<app-register-component></app-register-component>
--->
-<router-outlet />
+<div class="layout-container">
+  <app-navbar></app-navbar>
+  <div class="content-container">
+    <router-outlet />
+  </div>
+
+</div>

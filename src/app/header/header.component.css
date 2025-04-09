@@ -1,0 +1,17 @@
+.bx {
+  font-size: 300%;
+  color: #F4EDED;
+  margin-left: 30px;
+}
+
+span {
+  font-family: Inter;
+  font-size: 40px;
+  color: #F4EDED;
+  margin-left: 40px;
+}
+
+.header-toolbar {
+  background-color: #2B50AA;
+  height: 90px;
+}

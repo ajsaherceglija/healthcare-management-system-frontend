@@ -1,3 +1,5 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
 /* You can add global styles to this file, and also import other style files */
 * {
   margin: 0;
@@ -6,13 +8,25 @@
 }
 
 html {
-  font-size: 62.5%;
+  height: 100%;
 }
 
 body {
   font-family: Inter, sans-serif;
   background-color: #F4EDED;
-  font-size: 1.6rem;
+  height: 100%;
+}
+
+.mat-drawer-container {
+  height: 100vh;
+}
+
+.mat-sidenav {
+  width: 250px;
+}
+
+.content {
+  padding: 20px;
 }
 
 
