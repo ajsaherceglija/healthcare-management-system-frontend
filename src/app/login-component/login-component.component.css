@@ -1,6 +1,10 @@
+* {
+  font-size: 16px;
+}
+
 label {
   display: block;
-  margin-bottom: 1.6rem;
+  margin-bottom: 16px;
   color: #2B50AA;
   font-weight: bold;
 }
@@ -8,15 +12,15 @@ label {
 input {
   display: block;
   background-color: #F4EDED;
-  height: 5rem;
-  width: 40rem;
+  height: 50px;
+  width: 400px;
   border-radius: 50px;
   border: 5px solid #2B50AA;
-  padding: 0.2rem 0.8rem;
+  padding: 2px 0.8rem;
   color: #2B50AA;
   font-weight: bold;
-  font-size: 1.6rem;
-  margin-bottom: 1.8rem;
+  font-size: 16px;
+  margin-bottom: 18px;
 }
 
 .login-button {
@@ -25,10 +29,10 @@ input {
   color: #F4EDED;
   border: none;
   background-color: #2B50AA;
-  width: 15rem;
-  height: 5rem;
+  width: 150px;
+  height: 50px;
   border-radius: 50px;
-  font-size: 1.8rem;
+  font-size: 18px;
   margin: 0 auto;
 }
 
@@ -40,19 +44,19 @@ input {
 }
 
 .login-container {
-  max-width: 100rem;
+  max-width: 1000px;
   margin: 0 auto;
-  padding-top: 12rem;
+  padding-top: 120px;
   align-items: center;
 }
 
 .button-div {
-  margin-top: 6.4rem;
-  margin-bottom: 6.4rem;
+  margin-top: 64px;
+  margin-bottom: 64px;
 }
 
 .login-form {
-  max-width: 40rem;
+  max-width: 400px;
   margin: 0 auto;
 }
 
