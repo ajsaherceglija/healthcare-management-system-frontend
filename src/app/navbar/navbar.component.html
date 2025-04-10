@@ -6,7 +6,7 @@
         <span>Dashboard</span>
       </a>
 
-      <a mat-list-item [routerLink]="['/appointments', userId]">
+      <a mat-list-item [routerLink]="['/user/appointments', userId]">
         <mat-icon matListItemIcon>event</mat-icon>
         <span>Appointments</span>
       </a>
@@ -17,7 +17,7 @@
         <span>Documents</span>
       </a>
 
-      <a mat-list-item *ngIf="isDoctor" [routerLink]="['/patients', userId]">
+      <a mat-list-item [routerLink]="['/my-patients', userId]" *ngIf="isDoctor">
         <mat-icon matListItemIcon>people</mat-icon>
         <span>My Patients</span>
       </a>

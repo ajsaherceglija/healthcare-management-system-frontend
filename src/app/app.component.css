@@ -1,12 +1,11 @@
 .layout-container {
   display: flex;
-  height: 100vh;
+  height: calc(100vh - 90px);
   width: 100%;
 }
-
 .content-container {
-  display: flex;
   justify-content: center;
+  margin-left: 2rem;
   width: 100%;
 }
 app-navbar {

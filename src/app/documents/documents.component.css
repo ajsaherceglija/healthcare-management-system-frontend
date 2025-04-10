@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  position: relative;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background-color: #F4EDED;
+  padding: 2rem;
+  position: relative;
+}
+
+.upload-link {
+  position: absolute;
+  color: #1a54c4;
+  font-weight: bold;
+  text-decoration: none;
+  bottom: 2rem;
+  right: 2rem;
+}
+
+.upload-link:hover {
+  text-decoration: underline;
+}

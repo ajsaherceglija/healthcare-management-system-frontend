@@ -1,0 +1,41 @@
+<div class="patient-dialog">
+  <h2>{{ data.patient.name }}'s Medical Profile</h2>
+
+  <div class="patient-info-grid">
+    <div class="info-section">
+      <h3>Contact Information</h3>
+      <p><strong>Email:</strong> {{ data.patient.email }}</p>
+      <p><strong>Phone:</strong> {{ data.patient.phone }}</p>
+      <p><strong>Address:</strong> {{ data.patient.address }}</p>
+      <p><strong>City:</strong> {{ data.patient.city }}</p>
+    </div>
+
+    <div class="info-section">
+      <h3>Personal Information</h3>
+      <p><strong>Date of Birth:</strong> {{ data.patient.DOB | date }}</p>
+      <p><strong>Gender:</strong> {{ data.patient.gender }}</p>
+      <p><strong>Blood Group:</strong> {{ data.patient.blood_group }}</p>
+      <p><strong>Last Visit:</strong> {{ data.patient.last_visit || 'N/A' }}</p>
+    </div>
+  </div>
+
+  <div class="diagnosis-section">
+    <h3>Current Diagnoses</h3>
+    <div formArrayName="diagnoses">
+      <div *ngFor="let diagnosis of diagnoses.controls; let i = index" class="diagnosis-item">
+        <input [formControlName]="i" class="diagnosis-input">
+        <button mat-icon-button (click)="removeDiagnosis(i)" class="remove-btn">
+          <mat-icon>remove</mat-icon>
+        </button>
+      </div>
+    </div>
+    <button mat-button (click)="addDiagnosis()" class="add-btn">
+      <mat-icon>add</mat-icon> Add Diagnosis
+    </button>
+  </div>
+
+  <div class="dialog-actions">
+    <button mat-button (click)="closeDialog()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="save()">Save Changes</button>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+.main-container {
+  padding: 32px 24px;
+}
+
+h1 {
+  color: #2B50AA;
+  font-size: 48px;
+  margin-bottom: 32px;
+}
+
+.appointments-div {
+  margin-left: 16px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  row-gap: 24px;
+  column-gap: 24px;
+}
+
+.appointments-text {
+  margin-top: 16px;
+  font-size: 24px;
+  text-align: center;
+}
+
+.appointment-container {
+  padding: 18px 16px;
+  border-radius: 16px;
+  height: 200px;
+  width: 200px;
+  background-color: #CCCEE0;
+  font-size: 24px;
+  color: #291F1E;
+}
+
+.schedule-btn-div {
+  margin-top: 64px;
+  text-align: center;
+}
+
+.schedule-btn {
+  background-color: #F4EDED;
+  color: #2B50AA;
+  border: none;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.schedule-btn:hover {
+  cursor: pointer;
+  color: #1c3577;
+}

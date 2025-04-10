@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { MOCK_USERS, User } from '../models/user.model';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +10,9 @@ export class AuthService {
   private userSubject = new BehaviorSubject<User | null>(null);
 
   currentUser$ = this.userSubject.asObservable();
+
+  constructor(private router: Router) {
+  }
 
   setUser(uid: number) {
     const user = MOCK_USERS.find((user) => user.uid === uid);
@@ -32,6 +36,7 @@ export class AuthService {
 
   logout() {
     this.userSubject.next(null);
+    this.router.navigate(['/']);
   }
 
   isDoctor(): boolean {
