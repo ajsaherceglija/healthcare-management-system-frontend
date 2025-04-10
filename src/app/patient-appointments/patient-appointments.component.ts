@@ -48,7 +48,7 @@ export class PatientAppointmentsComponent implements OnInit{
   }
 
 
-  handleBooking(data: SubmitEvent) {
+  handleBooking(data: { department: string; doctor: string; note: string }) {
     console.log('Booked appointment:', data);
   }
 

@@ -7,7 +7,6 @@
 .content-container {
  /* display: flex;*/
   justify-content: center;
-  display: flex;
   /*justify-content: left;*/
   margin-left: 2rem;
   width: 100%;
