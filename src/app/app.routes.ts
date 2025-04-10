@@ -7,6 +7,8 @@ import {RegisterComponentComponent} from './register-component/register-componen
 import {AppointmentsWrapperComponent} from './appointments-wrapper/appointments-wrapper.component';
 
 export const routes: Routes = [
+  {path: 'user/:uid', component: ProfileComponent},
+  {path: 'appointments/:uid', component: AppointmentsWrapperComponent},
   {path: '', component: LoginComponentComponent},
   {path: 'register', component: RegisterComponentComponent},
   {path: 'user/:uid', component: ProfileComponent},
@@ -14,4 +16,3 @@ export const routes: Routes = [
   { path: 'documents/:uid', component: DocumentsComponent },
   { path: 'my-patients/:uid', component: PatientsListComponent }
 ];
-
