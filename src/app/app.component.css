@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 .layout-container {
   display: flex;
   height: calc(100vh - 90px);
@@ -13,4 +11,4 @@
 app-navbar {
   width: 400px;
 }
->>>>>>> Stashed changes
+
