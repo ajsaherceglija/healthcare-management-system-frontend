@@ -1,0 +1,25 @@
+<div class="main-container">
+  <h1>My appointments</h1>
+  <div class="appointments-div">
+    <div class="appointment-container" *ngFor="let appointment of appointments" (click)="openDetails(appointment)">
+      <p class="appointments-text">{{appointment.date}}</p>
+      <p class="appointments-text">{{appointment.time}}</p>
+    </div>
+  </div>
+  <div class="schedule-btn-div">
+    <button type="button" class="schedule-btn" (click)="openModal()">+ Schedule a new appointment</button>
+  </div>
+</div>
+
+<app-patient-appointment-details
+  *ngIf="selectedAppointment"
+  [appointment]="selectedAppointment"
+  (close)="closeModal()"
+  (cancel)="cancelAppointment()"
+></app-patient-appointment-details>
+
+<app-schedule-appointment
+*ngIf="showSchedule"
+(booked)="handleBooking($event)"
+(close)="showSchedule=false"
+></app-schedule-appointment>

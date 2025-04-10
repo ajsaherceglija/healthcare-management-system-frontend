@@ -1,0 +1,77 @@
+<div class="patients-page">
+  <div class="patients-sidebar">
+    <div class="search-container">
+      <input [(ngModel)]="searchQuery" placeholder="Search..." class="search-input">
+    </div>
+
+    <div class="patients-list">
+      <div *ngFor="let patient of filteredPatients"
+           class="patient-item"
+           (click)="openPatientDetails(patient)"
+           [class.selected]="selectedPatient?.uid === patient.uid">
+        <span class="patient-name">{{ patient.name }}</span>
+        <span class="patient-id">{{ patient.uid }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="patient-details-panel" *ngIf="selectedPatient">
+    <div class="patient-header">
+      <h2>{{ selectedPatient.name }}</h2>
+      <div class="patient-id">{{ selectedPatient.uid }}</div>
+    </div>
+
+    <div class="diagnosis-section">
+      <h3>Current diagnosis</h3>
+      <div class="diagnosis-item" *ngFor="let diag of diagnoses; let i = index">
+        <input [(ngModel)]="diagnoses[i]"
+               class="diagnosis-input"
+               placeholder="Enter diagnosis">
+        <button class="remove-btn" (click)="removeDiagnosis(i)">−</button>
+      </div>
+      <button class="add-btn" (click)="addDiagnosis()">+ Add Diagnosis</button>
+    </div>
+
+    <div class="patient-info-grid">
+      <div class="info-section">
+        <h3>Contact</h3>
+        <div class="info-row">
+          <span class="info-label">Email:</span>
+          <span class="info-value">{{ selectedPatient.email }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Phone:</span>
+          <span class="info-value">{{ selectedPatient.phone }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Address:</span>
+          <span class="info-value">{{ selectedPatient.address }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">City:</span>
+          <span class="info-value">{{ selectedPatient.city }}</span>
+        </div>
+      </div>
+
+      <div class="info-section">
+        <h3>Personal</h3>
+        <div class="info-row">
+          <span class="info-label">Date of Birth:</span>
+          <span class="info-value">{{ selectedPatient.DOB | date }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Gender:</span>
+          <span class="info-value">{{ selectedPatient.gender }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Blood Group:</span>
+          <span class="info-value">{{ selectedPatient.blood_group }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button class="save-btn" (click)="saveChanges()">Save</button>
+    </div>
+  </div>
+</div>
