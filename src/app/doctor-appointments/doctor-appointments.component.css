@@ -1,0 +1,111 @@
+.container {
+  color: #291f1e;
+  margin-left: 100px;
+  width: 500px;
+  font-family: Inter, sans-serif;
+}
+h2 {
+  margin: 70px 0 30px 0;
+}
+
+.appointment-row {
+  background: rgba(43, 80, 170, 0.2);
+  padding: 25px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.date-box {
+  background: #f4eded;
+  font-weight: bold;
+  width: 50px;
+  text-align: center;
+  padding: 8px;
+  border-radius: 8px;
+  margin-right: 16px;
+}
+
+
+.appointment-row.upcoming {
+  background: rgba(43, 80, 170, 0.5);
+}
+
+.manage-btn {
+  background-color: #2b50aa;
+  color: #f4eded;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.manage-btn:hover {
+  background-color: rgba(43, 80, 170, 0.95);
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #C8D4F1;
+  padding: 30px;
+  border-radius: 16px;
+  width: 320px;
+  z-index: 20;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  font-family: Inter, sans-serif;
+  color: #291f1e;
+}
+
+.note-box {
+  background-color: #f4eded;
+  border-radius: 16px;
+  padding: 12px;
+  margin-bottom: 16px;
+}
+
+.modal input {
+  width: 95%;
+  padding: 8px;
+  margin-bottom: 12px;
+  border-radius: 16px;
+  border: 1px solid #d9d9d9;
+  background-color: #f4eded;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-buttons button {
+  width: 48%;
+  padding: 8px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.modal-buttons .reject {
+  background-color: #2b50aa;
+  color: #f4eded;
+}
+
+.modal-buttons button:disabled {
+  background-color: #f4eded;
+  cursor: not-allowed;
+}
