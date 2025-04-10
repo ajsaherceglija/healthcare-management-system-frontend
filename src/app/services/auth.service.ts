@@ -23,6 +23,13 @@ export class AuthService {
     return MOCK_USERS.find(user => user.uid === uid);
   }
 
+  updateUser(updatedUser: User): void {
+    const index = MOCK_USERS.findIndex(user => user.uid === updatedUser.uid);
+    if (index !== -1) {
+      MOCK_USERS[index] = updatedUser;
+    }
+  }
+
   logout() {
     this.userSubject.next(null);
   }
