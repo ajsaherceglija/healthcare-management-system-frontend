@@ -1,0 +1,19 @@
+<div class="parent-modal">
+  <div class="modal">
+    <div class="form-div">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <label class="label">Department</label>
+        <input type="text" class="schedule-input" formControlName="department">
+        <label class="label">Doctor</label>
+        <input type="text" class="schedule-input" formControlName="doctor">
+        <label class="label">Notes</label>
+        <textarea formControlName="note"></textarea>
+
+        <div class="schedule-btn-div">
+          <button type="button" class="close-btn" (click)="onClose()">Close</button>
+          <button type="submit" class="schedule-btn">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

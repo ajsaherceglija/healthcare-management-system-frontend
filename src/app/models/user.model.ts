@@ -18,6 +18,7 @@ export interface User {
   role: UserRole;
 }
 
+
 export const MOCK_USERS: User[] = [
   {
     uid: 123,
@@ -50,3 +51,4 @@ export const MOCK_USERS: User[] = [
     role: 'doctor'
   }
 ];
+
