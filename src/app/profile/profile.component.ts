@@ -6,6 +6,8 @@ import {AuthService} from '../services/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DatePipe, NgIf, UpperCasePipe} from '@angular/common';
 import {User} from '../models/user.model';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import {EditProfileDialogComponent} from '../edit-profile-dialog/edit-profile-dialog.component';
 
 @Component({
   selector: 'app-profile',
@@ -14,6 +16,7 @@ import {User} from '../models/user.model';
     MatCardModule,
     MatIconModule,
     MatButtonModule,
+    MatDialogModule,
     NgIf,
     UpperCasePipe,
     DatePipe
@@ -24,15 +27,15 @@ import {User} from '../models/user.model';
 export class ProfileComponent implements OnInit{
   public user!: User;
 
-  constructor(private authService: AuthService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private authService: AuthService, private route: ActivatedRoute, private dialog: MatDialog, private router: Router) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
-      const id = Number(params.get('uid')); // Get the user ID from the route
+      const id = Number(params.get('uid'));
       if (id) {
         this.authService.setUser(id);
         this.loadUserData(id);
-      } 
+      }
     });
   }
 
@@ -40,9 +43,23 @@ export class ProfileComponent implements OnInit{
     const userData = this.authService.getUserById(uid);
     if (userData) {
       this.user = userData;
-    }
-    else {
-      this.router.navigate(['/']);
+    } else {
+      this.router.navigate(['']);
     }
   }
+
+  openEditDialog(): void {
+    const dialogRef = this.dialog.open(EditProfileDialogComponent, {
+      width: '550px',
+      data: { ...this.user }, // shallow copy
+    });
+
+    dialogRef.afterClosed().subscribe((result: User | undefined) => {
+      if (result) {
+        this.authService.updateUser(result);
+        this.user = result;
+      }
+    });
+  }
+
 }

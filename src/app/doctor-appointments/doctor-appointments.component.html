@@ -1,1 +1,42 @@
-<p>doctor-appointments works!</p>
+<div class="container">
+  <h2>New requests</h2>
+  <div *ngFor="let appointment of newRequests" class="appointment-row">
+    <div class="date-box">
+      {{ getDayLabel(appointment.date) }}<br />{{ getDateLabel(appointment.date) }}
+    </div>
+    <div class="appointment-info">{{ getPatientName(appointment.patientId) }}</div>
+    <button class="manage-btn" (click)="openManageModal(appointment)">Manage</button>
+  </div>
+
+  <h2>Upcoming appointments</h2>
+  <div *ngFor="let appointment of acceptedAppointments" class="appointment-row upcoming">
+    <div class="date-box">
+      {{ getDayLabel(appointment.date) }}<br />{{ getDateLabel(appointment.date) }}
+    </div>
+    <div class="appointment-info">{{ getPatientName(appointment.patientId) }}</div>
+    <div class="appointment-info">
+      {{ appointment.time }}<br />
+      Room: {{ appointment.room }}
+    </div>
+  </div>
+
+  <div class="modal-backdrop" *ngIf="selectedAppointment" (click)="closeModal()"></div>
+  <div class="modal" *ngIf="selectedAppointment">
+    <h3>Patient: {{ getPatientName(selectedAppointment.patientId) }}</h3>
+    <p class="note-box">{{ selectedAppointment.note }}</p>
+
+    <label>Date</label>
+    <input type="date" [(ngModel)]="selectedDate" />
+
+    <label>Time</label>
+    <input type="time" [(ngModel)]="selectedTime" />
+
+    <label>Room</label>
+    <input type="text" [(ngModel)]="selectedRoom" />
+
+    <div class="modal-buttons">
+      <button [disabled]="!isAcceptValid()" (click)="accept()">Accept</button>
+      <button class="reject" (click)="reject()">Reject</button>
+    </div>
+  </div>
+</div>

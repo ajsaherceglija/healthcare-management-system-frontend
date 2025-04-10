@@ -18,7 +18,6 @@ export class NavbarComponent implements OnInit{
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    // Subscribe to the user ID from the service
     this.authService.currentUser$.subscribe((user) => {
       this.userId = user?.uid!;
       this.isDoctor = this.authService.isDoctor();
@@ -27,7 +26,6 @@ export class NavbarComponent implements OnInit{
   logout() {
     this.authService.logout();
 
-    // Redirect the user to the login page (or another page)
-    this.router.navigate(['/']);
+    this.router.navigate(['']);
   }
 }
