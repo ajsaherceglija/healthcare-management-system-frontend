@@ -2,8 +2,8 @@
   <h1>My appointments</h1>
   <div class="appointments-div">
     <div class="appointment-container" *ngFor="let appointment of appointments" (click)="openDetails(appointment)">
-      <p class="appointments-text">{{appointment.date}}</p>
-      <p class="appointments-text">{{appointment.time}}</p>
+      <p class="appointments-text">{{appointment.date | date: 'yyyy-MM-dd' }}</p>
+      <p class="appointments-text">{{appointment.date  | date: 'HH:mm'}}</p>
     </div>
   </div>
   <div class="schedule-btn-div">

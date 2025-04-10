@@ -2,13 +2,14 @@ export interface Appointment {
   aid: number;
   patientId: number;
   doctorId: number;
+  room: number;
+  note: string;
   doctor: string;
   patient: string;
-  date: string;
+  date: Date;
   time: string;
   department: string;
-  room: string;
-  status: 'upcoming' | 'completed' | 'cancelled';
+  status: string;
 }
 
 export const MOCK_APPOINTMENTS: Appointment[] = [
@@ -18,11 +19,12 @@ export const MOCK_APPOINTMENTS: Appointment[] = [
     doctorId: 456,
     doctor: 'Jane Smith',
     patient: 'John Doe',
-    date: '2025-03-08',
-    time: '18:00',
     department: 'Cardiology',
-    room: '3B',
-    status: 'upcoming'
+    room: 0,
+    status: 'upcoming',
+    note: 'Available on Monday.',
+    date: new Date(),
+    time: ''
   },
   {
     aid: 2,
@@ -30,10 +32,24 @@ export const MOCK_APPOINTMENTS: Appointment[] = [
     doctorId: 456,
     doctor: 'Jane Smith',
     patient: 'John Doe',
-    date: '2025-03-08',
-    time: '19:00',
     department: 'Cardiology',
-    room: '3B',
+    room: 0,
+    note: 'Afternoons on Thursday.',
+    date: new Date(),
+    time: '',
+    status: 'upcoming'
+  },
+  {
+    aid: 3,
+    patientId: 103,
+    doctorId: 202,
+    doctor: 'Jane Smith',
+    patient: 'John Doe',
+    department: 'Cardiology',
+    room: 0,
+    note: 'Evenings on Friday.',
+    date: new Date(),
+    time: '',
     status: 'upcoming'
   }
 ];
