@@ -44,10 +44,10 @@ export class AppointmentsWrapperComponent implements OnInit {
       if (fetchedUser) {
         this.user = fetchedUser;
       } else {
-        this.router.navigate(['/login']);
+        this.router.navigate(['']);
       }
     } else {
-      this.router.navigate(['/login']);
+      this.router.navigate(['']);
     }
   }
 }

@@ -30,7 +30,7 @@ export class DoctorAppointmentsComponent implements OnInit {
     const foundDoctor = MOCK_USERS.find(user => user.uid === this.doctor?.uid);
 
     if (!foundDoctor) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['']);
     }
 
     this.appointments = MOCK_APPOINTMENTS.filter(
@@ -39,7 +39,7 @@ export class DoctorAppointmentsComponent implements OnInit {
   }
 
   get newRequests() {
-    return this.appointments.filter(appt => appt.status === 'pending');
+    return this.appointments.filter(appt => appt.status === 'upcoming');
   }
 
   get acceptedAppointments() {

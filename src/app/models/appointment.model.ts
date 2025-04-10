@@ -37,7 +37,7 @@ export const MOCK_APPOINTMENTS: Appointment[] = [
     note: 'Afternoons on Thursday.',
     date: new Date(),
     time: '',
-    status: 'pending'
+    status: 'upcoming'
   },
   {
     aid: 3,
@@ -50,6 +50,6 @@ export const MOCK_APPOINTMENTS: Appointment[] = [
     note: 'Evenings on Friday.',
     date: new Date(),
     time: '',
-    status: 'pending'
+    status: 'upcoming'
   }
 ];
