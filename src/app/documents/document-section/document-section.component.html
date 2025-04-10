@@ -1,0 +1,9 @@
+<h2>{{ title }}</h2>
+<div class="document-row">
+  <app-document-card
+    *ngFor="let doc of documents"
+    [name]="doc.name"
+  ></app-document-card>
+</div>
+
+
