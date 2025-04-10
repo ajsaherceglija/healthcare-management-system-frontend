@@ -35,5 +35,8 @@
       <span class="detail-label">Blood Group:</span>
       <span>{{ user.blood_group }}</span>
     </div>
+    <mat-card-actions align="end">
+      <button mat-raised-button color="primary" (click)="openEditDialog()">Edit Profile</button>
+    </mat-card-actions>
   </mat-card-content>
 </mat-card>
