@@ -12,7 +12,7 @@ export class ScheduleAppointmentComponent {
 
   form: FormGroup;
   @Output() close = new EventEmitter<void>();
-  @Output() submit = new EventEmitter<{department: string, doctor: string, note: string}>();
+  @Output() booked = new EventEmitter<{department: string, doctor: string, note: string}>();
 
 
 
@@ -27,7 +27,7 @@ export class ScheduleAppointmentComponent {
 
   onSubmit() {
     if (this.form.valid) {
-      this.submit.emit(this.form.value);
+      this.booked.emit(this.form.value);
       this.onClose();
     }
   }
