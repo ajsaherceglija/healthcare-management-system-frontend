@@ -1,10 +1,13 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Appointment} from '../models/appointment.model';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-patient-appointment-details',
   standalone: true,
-  imports: [],
+  imports: [
+    DatePipe
+  ],
   templateUrl: './patient-appointment-details.component.html',
   styleUrl: './patient-appointment-details.component.css'
 })
