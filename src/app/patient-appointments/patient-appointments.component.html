@@ -7,7 +7,7 @@
     </div>
   </div>
   <div class="schedule-btn-div">
-    <button type="button" class="schedule-btn">+ Schedule a new appointment</button>
+    <button type="button" class="schedule-btn" (click)="openModal()">+ Schedule a new appointment</button>
   </div>
 </div>
 
@@ -17,3 +17,9 @@
   (close)="closeModal()"
   (cancel)="cancelAppointment()"
 ></app-patient-appointment-details>
+
+<app-schedule-appointment
+*ngIf="showSchedule"
+(submit)="handleBooking($event)"
+(close)="showSchedule=false"
+></app-schedule-appointment>

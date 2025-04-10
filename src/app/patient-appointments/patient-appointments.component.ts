@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import {User} from '../models/user.model';
 import {Appointment, MOCK_APPOINTMENTS} from '../models/appointment.model';
 import {PatientAppointmentDetailsComponent} from '../patient-appointment-details/patient-appointment-details.component';
+import {ScheduleAppointmentComponent} from '../schedule-appointment/schedule-appointment.component';
 
 @Component({
   selector: 'app-patient-appointments',
   standalone: true,
-  imports: [CommonModule, PatientAppointmentDetailsComponent],
+  imports: [CommonModule, PatientAppointmentDetailsComponent, ScheduleAppointmentComponent],
   templateUrl: './patient-appointments.component.html',
   styleUrl: './patient-appointments.component.css'
 })
@@ -15,6 +16,7 @@ export class PatientAppointmentsComponent implements OnInit{
   @Input() patient!: User;
   appointments: Appointment[] = [];
   selectedAppointment: Appointment | null = null;
+  showSchedule = false;
 
   ngOnInit() {
     this.loadAppointments()
@@ -41,5 +43,13 @@ export class PatientAppointmentsComponent implements OnInit{
     }
   }
 
+  openModal() {
+    this.showSchedule = true;
+  }
+
+
+  handleBooking(data: SubmitEvent) {
+    console.log('Booked appointment:', data);
+  }
 
 }
