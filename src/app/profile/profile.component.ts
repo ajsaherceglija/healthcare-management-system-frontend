@@ -44,7 +44,7 @@ export class ProfileComponent implements OnInit{
     if (userData) {
       this.user = userData;
     } else {
-      this.router.navigate(['/login']);
+      this.router.navigate(['']);
     }
   }
 
