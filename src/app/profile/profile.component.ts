@@ -5,7 +5,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {AuthService} from '../services/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DatePipe, NgIf, UpperCasePipe} from '@angular/common';
-import {User} from '../models/user.model';
+import {UserDto} from '../models/user.model';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {EditProfileDialogComponent} from '../edit-profile-dialog/edit-profile-dialog.component';
 
@@ -25,7 +25,7 @@ import {EditProfileDialogComponent} from '../edit-profile-dialog/edit-profile-di
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent implements OnInit{
-  public user!: User;
+  public user!: UserDto;
 
   constructor(private authService: AuthService, private route: ActivatedRoute, private dialog: MatDialog, private router: Router) {}
 
@@ -33,33 +33,32 @@ export class ProfileComponent implements OnInit{
     this.route.paramMap.subscribe((params) => {
       const id = Number(params.get('uid'));
       if (id) {
-        this.authService.setUser(id);
-        this.loadUserData(id);
+        this.authService.getUserById(id).subscribe({
+          next: (user) => {
+            this.user = user;
+          },
+          error: () => {
+            this.router.navigate(['']);
+          }
+        });
       }
     });
-  }
-
-  loadUserData(uid: number): void {
-    const userData = this.authService.getUserById(uid);
-    if (userData) {
-      this.user = userData;
-    } else {
-      this.router.navigate(['']);
-    }
   }
 
   openEditDialog(): void {
     const dialogRef = this.dialog.open(EditProfileDialogComponent, {
       width: '550px',
-      data: { ...this.user }, // shallow copy
+      data: { ...this.user },
     });
 
-    dialogRef.afterClosed().subscribe((result: User | undefined) => {
+    dialogRef.afterClosed().subscribe((result: UserDto | undefined) => {
       if (result) {
-        this.authService.updateUser(result);
-        this.user = result;
+        this.authService.updateUser(result).subscribe((updated) => {
+          this.user = updated;
+        });
       }
     });
   }
+
 
 }
