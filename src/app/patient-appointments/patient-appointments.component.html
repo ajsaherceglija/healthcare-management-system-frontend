@@ -1,3 +1,4 @@
+
 <div class="main-container">
   <h1>My appointments</h1>
   <div class="appointments-div">
@@ -19,7 +20,7 @@
 ></app-patient-appointment-details>
 
 <app-schedule-appointment
-*ngIf="showSchedule"
-(booked)="handleBooking($event)"
-(close)="showSchedule=false"
+  *ngIf="showSchedule"
+  (booked)="handleBooking($event)"
+  (close)="showSchedule=false"
 ></app-schedule-appointment>
