@@ -8,7 +8,7 @@ export interface UserDto {
   phone: string;
   address: string;
   city: string;
-  DOB: Date;
+  dob: Date;
   gender: string;
   blood_group: string;
   role: UserRole;
@@ -24,7 +24,7 @@ export const MOCK_USERS: UserDto[] = [
     phone: '+387 33 975 002',
     address: 'Hrasnička cesta 3a',
     city: 'Sarajevo',
-    DOB: new Date('1985-01-01'),
+    dob: new Date('1985-01-01'),
     gender: 'Male',
     blood_group: 'A+',
     role: 'patient'
@@ -37,7 +37,7 @@ export const MOCK_USERS: UserDto[] = [
     phone: '+387 33 975 003',
     address: 'Medical Center St 1',
     city: 'Sarajevo',
-    DOB: new Date('1980-05-15'),
+    dob: new Date('1980-05-15'),
     gender: 'Female',
     blood_group: 'B+',
     role: 'doctor'

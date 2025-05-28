@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {User} from '../models/user.model';
+import {UserDto} from '../models/user.model';
 import {Appointment, MOCK_APPOINTMENTS} from '../models/appointment.model';
 import {PatientAppointmentDetailsComponent} from '../patient-appointment-details/patient-appointment-details.component';
 import {ScheduleAppointmentComponent} from '../schedule-appointment/schedule-appointment.component';
@@ -13,7 +13,7 @@ import {ScheduleAppointmentComponent} from '../schedule-appointment/schedule-app
   styleUrl: './patient-appointments.component.css'
 })
 export class PatientAppointmentsComponent implements OnInit{
-  @Input() patient!: User;
+  @Input() patient!: UserDto;
   appointments: Appointment[] = [];
   selectedAppointment: Appointment | null = null;
   showSchedule = false;

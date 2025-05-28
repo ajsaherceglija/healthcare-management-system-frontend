@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { User, MOCK_USERS } from '../../models/user.model';
+import { UserDto, MOCK_USERS } from '../../models/user.model';
 import {DatePipe, NgForOf, NgIf} from '@angular/common';
 
 @Component({
@@ -12,17 +12,17 @@ import {DatePipe, NgForOf, NgIf} from '@angular/common';
 })
 export class PatientsListComponent {
   searchQuery: string = '';
-  patients: User[] = MOCK_USERS.filter(user => user.role === 'patient');
-  selectedPatient: User | null = null;
+  patients: UserDto[] = MOCK_USERS.filter(user => user.role === 'patient');
+  selectedPatient: UserDto | null = null;
   diagnoses: string[] = ['Asthma'];
 
-  get filteredPatients(): User[] {
+  get filteredPatients(): UserDto[] {
     return this.patients.filter(patient =>
       patient.name.toLowerCase().includes(this.searchQuery.toLowerCase())
     );
   }
 
-  openPatientDetails(patient: User): void {
+  openPatientDetails(patient: UserDto): void {
     this.selectedPatient = patient;
     this.diagnoses = ['Asthma'];
   }

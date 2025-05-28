@@ -2,7 +2,7 @@ import { Component, OnInit, OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { DocumentSectionComponent } from './document-section/document-section.component';
-import { User } from '../models/user.model';
+import { UserDto } from '../models/user.model';
 import { NgIf } from '@angular/common';
 
 @Component({
@@ -13,7 +13,7 @@ import { NgIf } from '@angular/common';
   styleUrls: ['./documents.component.css'],
 })
 export class DocumentsComponent implements OnInit, OnChanges {
-  user!: User;
+  user!: UserDto;
   finishedDocuments: { name: string }[] = [];
   myDocuments: { name: string }[] = [];
 
@@ -37,27 +37,25 @@ export class DocumentsComponent implements OnInit, OnChanges {
   }
 
   loadUserData(uid: number): void {
-    const userData = this.authService.getUserById(uid);
-    if (userData) {
-      this.user = userData;
+    this.authService.getUserById(uid).subscribe({
+      next: (userData) => {
+        this.user = userData;
 
-      if (this.authService.isDoctor()) {
-        this.finishedDocuments = [
-          { name: 'Allergies' },
-        ];
-        this.myDocuments = [
-          { name: 'Lab analysis' },
-          { name: 'Prescription' },
-        ];
-      } else {
-        this.finishedDocuments = [
-          { name: 'Lab analysis' },
-          { name: 'Prescription' },
-        ];
-        this.myDocuments = [
-          { name: 'Allergies' },
-        ];
+        if (this.authService.isDoctor()) {
+          this.finishedDocuments = [{ name: 'Allergies' }];
+          this.myDocuments = [{ name: 'Lab analysis' }, { name: 'Prescription' }];
+        } else {
+          this.finishedDocuments = [
+            { name: 'Lab analysis' },
+            { name: 'Prescription' }
+          ];
+          this.myDocuments = [{ name: 'Allergies' }];
+        }
+      },
+      error: () => {
+        console.error('User not found');
       }
-    }
+    });
   }
+
 }

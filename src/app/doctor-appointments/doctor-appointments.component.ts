@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Appointment, MOCK_APPOINTMENTS } from '../models/appointment.model';
-import {MOCK_USERS, User} from '../models/user.model';
+import {MOCK_USERS, UserDto} from '../models/user.model';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
@@ -17,7 +17,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class DoctorAppointmentsComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute) {}
 
-  @Input() doctor!: User;
+  @Input() doctor!: UserDto;
 
   appointments: Appointment[] = [];
   selectedAppointment: Appointment | null = null;

@@ -4,7 +4,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule } f
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { User } from '../../models/user.model';
+import { UserDto } from '../../models/user.model';
 
 @Component({
   selector: 'app-patient-details',
@@ -17,7 +17,7 @@ export class PatientDetailsComponent {
   patientForm: FormGroup;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { patient: User },
+    @Inject(MAT_DIALOG_DATA) public data: { patient: UserDto },
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<PatientDetailsComponent> // Still private
   ) {
