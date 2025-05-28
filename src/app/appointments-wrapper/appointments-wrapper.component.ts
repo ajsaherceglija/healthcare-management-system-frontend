@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DoctorAppointmentsComponent } from '../doctor-appointments/doctor-appointments.component';
 import { PatientAppointmentsComponent } from '../patient-appointments/patient-appointments.component';
 import { AuthService } from '../services/auth.service';
-import { User } from '../models/user.model';
+import { UserDto } from '../models/user.model';
 
 @Component({
   selector: 'app-appointments-wrapper',
@@ -27,7 +27,7 @@ import { User } from '../models/user.model';
   `
 })
 export class AppointmentsWrapperComponent implements OnInit {
-  user!: User;
+  user!: UserDto;
 
   constructor(
     private route: ActivatedRoute,
@@ -39,15 +39,19 @@ export class AppointmentsWrapperComponent implements OnInit {
     const uid = Number(this.route.snapshot.paramMap.get('uid'));
 
     if (uid) {
-      this.authService.setUser(uid);
-      const fetchedUser = this.authService.getUserById(uid);
-      if (fetchedUser) {
-        this.user = fetchedUser;
-      } else {
-        this.router.navigate(['']);
-      }
+      this.authService.getUserById(uid).subscribe({
+        next: (fetchedUser) => {
+          if (fetchedUser) {
+            this.user = fetchedUser;
+          } else {
+            this.router.navigate(['']);
+          }
+        },
+        error: () => this.router.navigate([''])
+      });
     } else {
       this.router.navigate(['']);
     }
   }
+
 }
