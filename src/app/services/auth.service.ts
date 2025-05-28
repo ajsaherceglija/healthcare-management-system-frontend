@@ -1,40 +1,39 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { MOCK_USERS, User } from '../models/user.model';
-import {Router} from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { UserDto } from '../models/user.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private userSubject = new BehaviorSubject<User | null>(null);
-
+  private baseUrl = 'http://localhost:8080';
+  private userSubject = new BehaviorSubject<UserDto | null>(null);
   currentUser$ = this.userSubject.asObservable();
 
-  constructor(private router: Router) {
+  constructor(private http: HttpClient, private router: Router) {}
+
+  getUserById(uid: number): Observable<UserDto> {
+    return this.http.get<UserDto>(`${this.baseUrl}/user/${uid}`).pipe(
+      tap((user) => this.userSubject.next(user))
+    );
   }
 
-  setUser(uid: number) {
-    const user = MOCK_USERS.find((user) => user.uid === uid);
-    if (user) {
-      this.userSubject.next(user);
-    } else {
-      this.userSubject.next(null);
-    }
+  setUser(uid: number): void {
+    this.getUserById(uid).subscribe({
+      next: (user) => this.userSubject.next(user),
+      error: () => this.userSubject.next(null)
+    });
   }
 
-  getUserById(uid: number) {
-    return MOCK_USERS.find(user => user.uid === uid);
+  updateUser(user: UserDto): Observable<UserDto> {
+    return this.http.put<UserDto>(`${this.baseUrl}/user/${user.uid}`, user).pipe(
+      tap((updated) => this.userSubject.next(updated))
+    );
   }
 
-  updateUser(updatedUser: User): void {
-    const index = MOCK_USERS.findIndex(user => user.uid === updatedUser.uid);
-    if (index !== -1) {
-      MOCK_USERS[index] = updatedUser;
-    }
-  }
-
-  logout() {
+  logout(): void {
     this.userSubject.next(null);
     this.router.navigate(['/']);
   }
