@@ -1,5 +1,6 @@
+
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Appointment} from '../models/appointment.model';
+import {AppointmentDto} from '../models/appointment.model';
 import {DatePipe} from '@angular/common';
 
 @Component({
@@ -12,7 +13,7 @@ import {DatePipe} from '@angular/common';
   styleUrl: './patient-appointment-details.component.css'
 })
 export class PatientAppointmentDetailsComponent {
-  @Input() appointment!: Appointment;
+  @Input() appointment!: AppointmentDto;
   @Output() close = new EventEmitter<void>();
   @Output() cancel = new EventEmitter<void>();
 
