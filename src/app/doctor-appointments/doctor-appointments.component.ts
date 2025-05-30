@@ -1,11 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AppointmentDto, MOCK_APPOINTMENTS } from '../models/appointment.model';
-import {MOCK_USERS, UserDto} from '../models/user.model';
+import { AppointmentDto } from '../models/appointment.model';
+import { UserDto } from '../models/user.model';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AppointmentService } from '../services/appointment.service';
+import { PatientService } from '../services/patient.service';  // <-- Use PatientService now
 
 @Component({
   selector: 'app-doctor-appointments',
@@ -15,8 +17,6 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./doctor-appointments.component.css']
 })
 export class DoctorAppointmentsComponent implements OnInit {
-  constructor(private router: Router, private route: ActivatedRoute) {}
-
   @Input() doctor!: UserDto;
 
   appointments: AppointmentDto[] = [];
@@ -26,16 +26,53 @@ export class DoctorAppointmentsComponent implements OnInit {
   selectedTime: string = '';
   selectedRoom: string = '';
 
+  // Map patientId => patientName
+  patientNameMap = new Map<number, string>();
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private appointmentService: AppointmentService,
+    private patientService: PatientService  // <-- inject PatientService
+  ) {}
+
   ngOnInit(): void {
-    const foundDoctor = MOCK_USERS.find(user => user.uid === this.doctor?.uid);
-
-    if (!foundDoctor) {
+    if (!this.doctor?.uid) {
       this.router.navigate(['']);
+      return;
     }
+    this.loadAppointments();
+  }
 
-    this.appointments = MOCK_APPOINTMENTS.filter(
-      (appt) => appt.doctorId === this.doctor.uid
-    );
+  loadAppointments() {
+    this.appointmentService.getDoctorAppointmentsByUserId(this.doctor.uid).subscribe({
+      next: (response) => {
+        this.appointments = [
+          ...(response.requested || []),
+          ...(response.upcoming || [])
+        ];
+
+        // Extract unique patient IDs
+        const patientIds = Array.from(new Set(this.appointments.map(appt => appt.patientId)));
+
+        // Fetch and cache patient names
+        patientIds.forEach(pid => {
+          if (!this.patientNameMap.has(pid)) {
+            this.patientService.getPatientById(pid).subscribe({
+              next: (user) => {
+                this.patientNameMap.set(pid, user.name);
+              },
+              error: () => {
+                this.patientNameMap.set(pid, 'Unknown Patient');
+              }
+            });
+          }
+        });
+      },
+      error: (err) => {
+        console.error('Failed to load appointments:', err);
+      }
+    });
   }
 
   get newRequests() {
@@ -47,19 +84,21 @@ export class DoctorAppointmentsComponent implements OnInit {
   }
 
   openManageModal(appointment: AppointmentDto) {
-    this.selectedAppointment = appointment;
-    this.selectedDate = '';
-    this.selectedTime = '';
-    this.selectedRoom = '';
+    this.selectedAppointment = { ...appointment };
+    this.selectedDate = appointment.date ? new Date(appointment.date).toISOString().split('T')[0] : '';
+    this.selectedTime = appointment.time;
+    this.selectedRoom = appointment.room?.toString() || '';
   }
 
   getPatientName(patientId: number): string {
-    const user = MOCK_USERS.find(u => u.uid === patientId);
-    return user ? `${user.name}` : 'Unknown Patient';
+    return this.patientNameMap.get(patientId) || 'Loading...';
   }
 
   closeModal() {
     this.selectedAppointment = null;
+    this.selectedDate = '';
+    this.selectedTime = '';
+    this.selectedRoom = '';
   }
 
   isAcceptValid() {
@@ -67,20 +106,40 @@ export class DoctorAppointmentsComponent implements OnInit {
   }
 
   accept() {
-    if (this.selectedAppointment) {
-      this.selectedAppointment.status = 'accepted';
-      this.selectedAppointment.date = new Date(this.selectedDate);
-      this.selectedAppointment.time = this.selectedTime;
-      this.selectedAppointment.room = Number(this.selectedRoom);
-      this.closeModal();
-    }
+    if (!this.selectedAppointment) return;
+
+    const updatedAppointment: AppointmentDto = {
+      ...this.selectedAppointment,
+      date: new Date(this.selectedDate),
+      time: this.selectedTime,
+      room: Number(this.selectedRoom),
+      status: 'accepted'
+    };
+
+    this.appointmentService.updateDoctorAppointment(this.doctor.uid, updatedAppointment, 'accept').subscribe({
+      next: (updated) => {
+        const index = this.appointments.findIndex(a => a.aid === updated.aid);
+        if (index !== -1) this.appointments[index] = updated;
+        this.closeModal();
+      },
+      error: (err) => {
+        console.error('Failed to accept appointment:', err);
+      }
+    });
   }
 
   reject() {
-    if (this.selectedAppointment) {
-      this.appointments = this.appointments.filter(a => a.aid !== this.selectedAppointment?.aid);
-      this.closeModal();
-    }
+    if (!this.selectedAppointment) return;
+
+    this.appointmentService.updateDoctorAppointment(this.doctor.uid, this.selectedAppointment, 'reject').subscribe({
+      next: () => {
+        this.appointments = this.appointments.filter(a => a.aid !== this.selectedAppointment?.aid);
+        this.closeModal();
+      },
+      error: (err) => {
+        console.error('Failed to reject appointment:', err);
+      }
+    });
   }
 
   getDayLabel(date: Date | string | undefined) {
