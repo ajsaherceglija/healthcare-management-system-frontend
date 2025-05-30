@@ -1,36 +1,52 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgFor} from '@angular/common';
 import {UserDto} from '../models/user.model';
 import {AppointmentDto, MOCK_APPOINTMENTS} from '../models/appointment.model';
 import {PatientAppointmentDetailsComponent} from '../patient-appointment-details/patient-appointment-details.component';
 import {ScheduleAppointmentComponent} from '../schedule-appointment/schedule-appointment.component';
 import { AppointmentService } from '../services/appointment.service';
 import { AuthService } from '../services/auth.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-patient-appointments',
   standalone: true,
-  imports: [CommonModule, PatientAppointmentDetailsComponent, ScheduleAppointmentComponent],
+  imports: [NgFor, CommonModule, PatientAppointmentDetailsComponent, ScheduleAppointmentComponent],
   templateUrl: './patient-appointments.component.html',
   styleUrl: './patient-appointments.component.css'
 })
 export class PatientAppointmentsComponent implements OnInit{
-
+  patientId!: number;
   @Input() patient!: UserDto;
   appointments: AppointmentDto[] = [];
   selectedAppointment: AppointmentDto | null = null;
   showSchedule = false;
 
   constructor(private appointmentService: AppointmentService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
+
     this.authService.currentUser$.subscribe((user) => {
       if (user) {
         this.loadAppointments(user.uid);
       }
-    });  }
+    });
+
+    this.route.paramMap.subscribe(params => {
+      const idString = params.get('uid');
+      if (idString) {
+        const id = Number(idString);
+        if (!isNaN(id)) {
+          this.patientId = id;
+          this.authService.setUser(id);
+        }
+      }
+    });
+
+  }
 
   private loadAppointments(uid: number) {
 
@@ -38,7 +54,7 @@ export class PatientAppointmentsComponent implements OnInit{
 
      this.appointmentService.getAppointmentsByUserId(uid).subscribe({
       next: (appointments) => {
-        this.appointments = appointments.filter(a => a.status === 'upcoming');
+        this.appointments = appointments.filter(a => a.status === 'upcoming' || a.status === 'accepted');
       },
 
       error: (err) => {

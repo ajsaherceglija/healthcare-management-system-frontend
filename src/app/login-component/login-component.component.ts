@@ -25,13 +25,16 @@ export class LoginComponentComponent {
   }
 
   login() {
-    const {email, password} = this.form.value;
-    const user = MOCK_USERS.find(u => u.email === email && u.password === password);
-    if (user) {
-      this.authService.setUser(user.uid);
-      this.router.navigate([`/user/${user.uid}`]);
-    } else {
-      this.router.navigate(['/']);
-    }
+    const { email, password } = this.form.value;
+    this.authService.login(email, password).subscribe({
+      next: (response) => {
+        this.router.navigate([`/user/${response.uid}`]);
+      },
+      error: (err) => {
+        console.error('Login failed', err);
+        alert('Invalid email or password');
+      }
+    });
   }
+
 }

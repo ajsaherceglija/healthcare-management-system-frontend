@@ -38,6 +38,7 @@ export class AppointmentsWrapperComponent implements OnInit {
   ngOnInit(): void {
     const uid = Number(this.route.snapshot.paramMap.get('uid'));
 
+
     if (uid) {
       this.authService.getUserById(uid).subscribe({
         next: (fetchedUser) => {
@@ -52,6 +53,8 @@ export class AppointmentsWrapperComponent implements OnInit {
     } else {
       this.router.navigate(['']);
     }
+
+
   }
 
 }
