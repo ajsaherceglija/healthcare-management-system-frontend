@@ -10,7 +10,7 @@ import {DepartmentDto} from '../models/department.model';
   providedIn: 'root',
 })
 export class AppointmentService {
-  private baseUrl = 'https://healthcare-management-system-04601a8f10ae.herokuapp.com//appointments';
+  private baseUrl = 'https://healthcare-management-system-04601a8f10ae.herokuapp.com/appointments';
 
   constructor(private http: HttpClient) {}
 
