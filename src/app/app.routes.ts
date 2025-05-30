@@ -12,7 +12,6 @@ export const routes: Routes = [
   {path: '', component: LoginComponentComponent},
   {path: 'register', component: RegisterComponentComponent},
   {path: 'user/:uid', component: ProfileComponent},
-  {path: 'user/appointments/:uid', component: AppointmentsWrapperComponent},
   { path: 'documents/:uid', component: DocumentsComponent },
   { path: 'my-patients/:uid', component: PatientsListComponent }
 ];

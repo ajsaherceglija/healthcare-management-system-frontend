@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Appointment, MOCK_APPOINTMENTS } from '../models/appointment.model';
+import { AppointmentDto, MOCK_APPOINTMENTS } from '../models/appointment.model';
 import {MOCK_USERS, UserDto} from '../models/user.model';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,8 +19,8 @@ export class DoctorAppointmentsComponent implements OnInit {
 
   @Input() doctor!: UserDto;
 
-  appointments: Appointment[] = [];
-  selectedAppointment: Appointment | null = null;
+  appointments: AppointmentDto[] = [];
+  selectedAppointment: AppointmentDto | null = null;
 
   selectedDate: string = '';
   selectedTime: string = '';
@@ -46,7 +46,7 @@ export class DoctorAppointmentsComponent implements OnInit {
     return this.appointments.filter(appt => appt.status === 'accepted');
   }
 
-  openManageModal(appointment: Appointment) {
+  openManageModal(appointment: AppointmentDto) {
     this.selectedAppointment = appointment;
     this.selectedDate = '';
     this.selectedTime = '';

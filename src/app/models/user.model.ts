@@ -12,6 +12,7 @@ export interface UserDto {
   gender: string;
   blood_group: string;
   role: UserRole;
+  jmbg :String;
 }
 
 
@@ -27,7 +28,8 @@ export const MOCK_USERS: UserDto[] = [
     dob: new Date('1985-01-01'),
     gender: 'Male',
     blood_group: 'A+',
-    role: 'patient'
+    role: 'patient',
+    jmbg: '1111111111'
   },
   {
     uid: 456,
@@ -40,7 +42,8 @@ export const MOCK_USERS: UserDto[] = [
     dob: new Date('1980-05-15'),
     gender: 'Female',
     blood_group: 'B+',
-    role: 'doctor'
+    role: 'doctor',
+    jmbg: '2222222'
   }
 ];
 
