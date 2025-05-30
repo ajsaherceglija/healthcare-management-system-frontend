@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import {AppointmentDto, DoctorAppointmentsView} from '../models/appointment.model';
 import { Observable } from 'rxjs';
+import {UserDto} from '../models/user.model';
+import {DepartmentDto} from '../models/department.model';
 
 @Injectable({
   providedIn: 'root',
@@ -45,5 +47,18 @@ export class AppointmentService {
   updateDoctorAppointment(uid: number, appointment: AppointmentDto, action: string): Observable<AppointmentDto> {
     const params = new HttpParams().set('action', action);
     return this.http.put<AppointmentDto>(`${this.baseUrl}/${uid}`, appointment, { params });
+  }
+
+  getDoctorFromUser(uid: number, did: number): Observable<UserDto> {
+    const params = new HttpParams().set('did', did.toString());
+
+    return this.http.get<UserDto>(`${this.baseUrl}/${uid}/single-doctor`, { params });
+  }
+
+  getDepartmentById(uid:number, did: number): Observable<DepartmentDto> {
+    const params = new HttpParams().set('did', did.toString());
+
+    return this.http.get<DepartmentDto>(`${this.baseUrl}/${uid}/get-department`, { params });
+
   }
 }

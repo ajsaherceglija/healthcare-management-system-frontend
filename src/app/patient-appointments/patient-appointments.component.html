@@ -5,6 +5,7 @@
     <div class="appointment-container" *ngFor="let appointment of appointments" (click)="openDetails(appointment)">
       <p class="appointments-text">{{ appointment.date ? (appointment.date | date: 'yyyy-MM-dd') : 'TBA' }}</p>
       <p class="appointments-text">{{ appointment.date ? (appointment.date | date: 'HH:mm') : 'TBA' }}</p>
+      <p class="appointments-text">{{ appointment.status }}</p>
     </div>
   </div>
   <div class="schedule-btn-div">
@@ -21,6 +22,7 @@
 
 <app-schedule-appointment
   *ngIf="showSchedule"
+  [patientId]="patientId"
   (booked)="handleBooking($event)"
   (close)="showSchedule=false"
 ></app-schedule-appointment>

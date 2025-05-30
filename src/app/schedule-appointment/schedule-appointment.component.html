@@ -3,9 +3,33 @@
     <div class="form-div">
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <label class="label">Department</label>
-        <input type="text" class="schedule-input" formControlName="department">
+        <select
+          class="schedule-input"
+          formControlName="department"
+          (change)="onDepartmentChange($event)"
+        >
+          <option value="">Select department</option>
+          <option
+            *ngFor="let dept of departments"
+            [value]="dept.id"
+          >
+            {{ dept.name }}
+          </option>
+        </select>
         <label class="label">Doctor</label>
-        <input type="text" class="schedule-input" formControlName="doctor">
+        <select
+          class="schedule-input"
+          formControlName="doctor"
+          [disabled]="!doctors.length"
+        >
+          <option value="">Select doctor</option>
+          <option
+            *ngFor="let doc of doctors"
+            [value]="doc.id"
+          >
+            {{ doc.name }}
+          </option>
+        </select>
         <label class="label">Notes</label>
         <textarea formControlName="note"></textarea>
 
