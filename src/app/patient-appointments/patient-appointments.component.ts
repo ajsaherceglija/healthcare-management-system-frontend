@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CommonModule, NgFor} from '@angular/common';
 import {UserDto} from '../models/user.model';
-import {AppointmentDto, MOCK_APPOINTMENTS} from '../models/appointment.model';
+import {AppointmentDto} from '../models/appointment.model';
 import {PatientAppointmentDetailsComponent} from '../patient-appointment-details/patient-appointment-details.component';
 import {ScheduleAppointmentComponent} from '../schedule-appointment/schedule-appointment.component';
 import { AppointmentService } from '../services/appointment.service';

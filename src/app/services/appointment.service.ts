@@ -15,21 +15,21 @@ export class AppointmentService {
   constructor(private http: HttpClient) {}
 
   getAppointmentsByUserId(uid: number): Observable<AppointmentDto[]> {
-    return this.http.get<AppointmentDto[]>(`/patient/${this.baseUrl}/${uid}`);
+    return this.http.get<AppointmentDto[]>(`${this.baseUrl}/patient/${uid}`);
   }
 
   getAppointmentById(uid: number, aid: number): Observable<AppointmentDto> {
     const params = new HttpParams().set('aid', aid.toString());
-    return this.http.get<AppointmentDto>(`/patient/${this.baseUrl}/${uid}/single`, { params });
+    return this.http.get<AppointmentDto>(`${this.baseUrl}/patient/${uid}/single`, { params });
   }
 
   cancelAppointment(uid: number, aid: number): Observable<AppointmentDto> {
     const params = new HttpParams().set('aid', aid.toString());
-    return this.http.put<AppointmentDto>(`/patient/${this.baseUrl}/${uid}/cancel`, {}, { params });
+    return this.http.put<AppointmentDto>(`${this.baseUrl}/patient/${uid}/cancel`, {}, { params });
   }
 
   bookAppointment(uid: number, appointment: AppointmentDto): Observable<AppointmentDto> {
-    return this.http.post<AppointmentDto>(`/patient/${this.baseUrl}/${uid}/schedule`, appointment);
+    return this.http.post<AppointmentDto>(`${this.baseUrl}/patient/${uid}/schedule`, appointment);
   }
 
   getDoctorAppointmentsByUserId(uid: number): Observable<DoctorAppointmentsView> {
@@ -52,13 +52,13 @@ export class AppointmentService {
   getDoctorFromUser(uid: number, did: number): Observable<UserDto> {
     const params = new HttpParams().set('did', did.toString());
 
-    return this.http.get<UserDto>(`/patient/${this.baseUrl}/${uid}/single-doctor`, { params });
+    return this.http.get<UserDto>(`${this.baseUrl}/patient/${uid}/single-doctor`, { params });
   }
 
   getDepartmentById(uid:number, did: number): Observable<DepartmentDto> {
     const params = new HttpParams().set('did', did.toString());
 
-    return this.http.get<DepartmentDto>(`/patient/${this.baseUrl}/${uid}/get-department`, { params });
+    return this.http.get<DepartmentDto>(`${this.baseUrl}/patient/${uid}/get-department`, { params });
 
   }
 }
