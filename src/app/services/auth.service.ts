@@ -13,7 +13,7 @@ interface AuthResponse {
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:8080';
+  private baseUrl = 'https://healthcare-management-system-04601a8f10ae.herokuapp.com';
   private userSubject = new BehaviorSubject<UserDto | null>(null);
   currentUser$ = this.userSubject.asObservable();
 
@@ -117,7 +117,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:8080';
+  private baseUrl = 'https://healthcare-management-system-04601a8f10ae.herokuapp.com';
   private userSubject = new BehaviorSubject<UserDto | null>(null);
   currentUser$ = this.userSubject.asObservable();
 
