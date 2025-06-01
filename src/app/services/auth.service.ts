@@ -21,7 +21,6 @@ export class AuthService {
     this.loadUserFromStorage();
   }
 
-  // === Your existing methods below exactly as is ===
 
   getUserById(uid: number): Observable<UserDto> {
     return this.http.get<UserDto>(`${this.baseUrl}/user/${uid}`).pipe(
@@ -54,14 +53,38 @@ export class AuthService {
     return user?.role === 'doctor';
   }
 
-  // === NEW METHODS FOR JWT AUTH FLOW ===
 
-  login(email: string, password: string): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.baseUrl}/auth/login`, { email, password }).pipe(
-      tap(response => {
-        localStorage.setItem('token', response.token);
-        localStorage.setItem('uid', response.uid.toString());
-        this.setUser(response.uid);
+  login(email: string, password: string): Observable<any> {
+    const body = { email, password };
+    return this.http.post<any>(`${this.baseUrl}/api/auth/login`, body).pipe(
+      tap((res) => {
+        console.log('Login response:', res);
+
+        if (res && res.token) { // Save token in local storage
+          localStorage.setItem('token', res.token);
+        }
+      })
+    );
+  }
+
+  // Register
+  register(firstName: string, lastName: string, gender: string, email: string, password: string, confirmPassword: string, address?: string, city?: string, phone?: string, dob?: Date, blood_group?: string, jmbg?: string): Observable<any> {
+    const body: any = { firstName,  lastName, gender, email, password, confirmPassword,};
+    if(address) body.address = address;
+    if (city) body.city = city;
+    if (phone) body.phone = phone;
+    if (dob) body.dob = dob;
+    if (blood_group) body.blood_group = blood_group;
+    if (jmbg) body.jmbg = jmbg;
+    console.log(body);
+
+    return this.http.post<any>(`${this.baseUrl}/api/auth/register`, body).pipe(
+      tap((res) => {
+        console.log('Register response:', res);
+
+        if (res && res.token) {
+          localStorage.setItem('token', res.token);
+        }
       })
     );
   }

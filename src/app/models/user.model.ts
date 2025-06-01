@@ -12,7 +12,7 @@ export interface UserDto {
   gender: string;
   blood_group: string;
   role: UserRole;
-  jmbg :String;
+  jmbg: string;
 }
 
 
