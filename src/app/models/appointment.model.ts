@@ -10,6 +10,11 @@ export interface AppointmentDto {
   status: string;
 }
 
+export interface DoctorAppointmentsView {
+  requested: AppointmentDto[];
+  upcoming: AppointmentDto[];
+}
+
 export const MOCK_APPOINTMENTS: AppointmentDto[] = [
   {
     aid: 1,

@@ -1,9 +1,7 @@
+
 <div class="container">
   <h2>New requests</h2>
   <div *ngFor="let appointment of newRequests" class="appointment-row">
-    <div class="date-box">
-      {{ getDayLabel(appointment.date) }}<br />{{ getDateLabel(appointment.date) }}
-    </div>
     <div class="appointment-info">{{ getPatientName(appointment.patientId) }}</div>
     <button class="manage-btn" (click)="openManageModal(appointment)">Manage</button>
   </div>
