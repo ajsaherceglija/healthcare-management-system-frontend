@@ -1,0 +1,21 @@
+<h2>Upload Document</h2>
+<form class="dialog-container">
+  <label class="label">Title:
+    <input [(ngModel)]="title" name="title" required cdkFocusInitial class="input" />
+  </label>
+  <br />
+
+  <label class="label">Content:
+    <textarea [(ngModel)]="content" name="content" required class="textarea"></textarea>
+  </label>
+  <br />
+
+  <label class="label">Patient ID:
+    <input type="number" [(ngModel)]="receiverId" name="receiverId" required class="input" />
+  </label>
+  <br />
+
+  <button type="button" (click)="onUpload()" class="button">Send</button>
+  <button type="button" (click)="onCancel()" class="button">Cancel</button>
+</form>
+

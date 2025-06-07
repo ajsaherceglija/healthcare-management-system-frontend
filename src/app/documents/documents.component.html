@@ -1,16 +1,22 @@
-<div class="container">
-    <main class="main">
-      <app-document-section
-        [title]="'Finished documents'"
-        [documents]="finishedDocuments">
-      </app-document-section>
-
-      <app-document-section
-        [title]="'My documents'"
-        [documents]="myDocuments">
-      </app-document-section>
-
-      <a class="upload-link" href="#">+ Upload documents</a>
-    </main>
+<div class="header-row">
+  <h2>My Documents</h2>
+  <button class="upload-btn" #uploadBtn (click)="openUploadDialog(uploadBtn)">
+    Upload New Document
+  </button>
 </div>
 
+<ul>
+  <li *ngFor="let doc of documents" class="document-item" (click)="openDocumentModal(doc)">
+    <strong>{{ doc.title }}</strong><br />
+    <!-- Maybe show a snippet of content or "Click to read more" -->
+    <em>Click to read full content</em>
+  </li>
+</ul>
+
+<div *ngIf="selectedDocument" class="modal" (click)="closeDocumentModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h3>{{ selectedDocument.title }}</h3>
+    <p>{{ selectedDocument.content }}</p>
+    <button (click)="closeDocumentModal()" class="close-button">Close</button>
+  </div>
+</div>

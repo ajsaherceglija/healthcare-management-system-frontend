@@ -1,61 +1,86 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { DocumentService } from '../services/document.service';
 import { AuthService } from '../services/auth.service';
-import { DocumentSectionComponent } from './document-section/document-section.component';
+import { DocumentDto } from '../models/document.model';
 import { UserDto } from '../models/user.model';
-import { NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { UploadDocumentDialogComponent } from '../upload-document-dialog/upload-document-dialog.component';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-documents',
   standalone: true,
-  imports: [DocumentSectionComponent, NgIf],
   templateUrl: './documents.component.html',
   styleUrls: ['./documents.component.css'],
+  imports: [FormsModule, CommonModule]
 })
-export class DocumentsComponent implements OnInit, OnChanges {
-  user!: UserDto;
-  finishedDocuments: { name: string }[] = [];
-  myDocuments: { name: string }[] = [];
+export class DocumentsComponent implements OnInit {
+  documents: DocumentDto[] = [];
+  currentUser: UserDto | null = null;
+  selectedDocument: DocumentDto | null = null;
 
-  constructor(private authService: AuthService, private route: ActivatedRoute) {}
+  constructor(
+    private documentService: DocumentService,
+    private authService: AuthService,
+    private dialog: MatDialog,
+  ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params) => {
-      const id = Number(params.get('uid'));
-      if (id) {
-        this.authService.setUser(id);
-        this.loadUserData(id);
+    this.authService.currentUser$.subscribe(user => {
+      this.currentUser = user;
+      if (user) {
+        this.loadDocuments();
       }
     });
   }
 
-  ngOnChanges() {
-    const uid = this.route.snapshot.paramMap.get('uid');
-    if (uid) {
-      this.loadUserData(+uid);
+  loadDocuments(): void {
+    if (!this.currentUser) return;
+    this.documentService.getDocumentsForUser(this.currentUser.uid).subscribe({
+      next: (docs) => this.documents = docs,
+      error: (err) => console.error('Failed to load documents', err)
+    });
+  }
+
+  openDocumentModal(doc: DocumentDto) {
+    this.selectedDocument = doc;
+  }
+
+  closeDocumentModal() {
+    this.selectedDocument = null;
+  }
+
+  openUploadDialog(button?: HTMLElement): void {
+    if (button) {
+      button.blur();
     }
-  }
 
-  loadUserData(uid: number): void {
-    this.authService.getUserById(uid).subscribe({
-      next: (userData) => {
-        this.user = userData;
+    const dialogRef = this.dialog.open(UploadDocumentDialogComponent, {
+      width: '400px'
+    });
 
-        if (this.authService.isDoctor()) {
-          this.finishedDocuments = [{ name: 'Allergies' }];
-          this.myDocuments = [{ name: 'Lab analysis' }, { name: 'Prescription' }];
-        } else {
-          this.finishedDocuments = [
-            { name: 'Lab analysis' },
-            { name: 'Prescription' }
-          ];
-          this.myDocuments = [{ name: 'Allergies' }];
-        }
-      },
-      error: () => {
-        console.error('User not found');
+    dialogRef.afterClosed().subscribe((documentData: any | undefined) => {
+      if (documentData && this.currentUser) {
+        // Add senderId and isForPatient properties
+        documentData.senderId = this.currentUser.uid.toString();
+        documentData.isForPatient = true;
+
+        this.documentService.sendDocument(documentData).subscribe({
+          next: (doc) => {
+            alert('Document sent successfully!');
+            this.documents.push(doc);
+          },
+          error: (err) => {
+            console.error('Failed to send document', err);
+            alert('Failed to send document');
+          }
+        });
       }
     });
+
+
   }
 
 }

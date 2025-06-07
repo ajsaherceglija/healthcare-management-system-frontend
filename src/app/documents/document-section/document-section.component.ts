@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {DocumentCardComponent} from '../document-card/document-card.component';
+import { CommonModule } from '@angular/common';
+import { DocumentCardComponent } from '../document-card/document-card.component';
 
 @Component({
   selector: 'app-document-section',
@@ -13,4 +13,3 @@ export class DocumentSectionComponent {
   @Input() title: string = '';
   @Input() documents: { name: string }[] = [];
 }
-
