@@ -1,4 +1,4 @@
-<div class="document-card">
-  <i class="doc-icon"></i>
-  <p>{{ name }}</p>
+<div class="card">
+  <h3>{{ name }}</h3>
+  <p>{{ content ? (content | slice:0:100) + '...' : 'No content' }}</p>
 </div>
