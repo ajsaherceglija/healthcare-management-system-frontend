@@ -8,7 +8,7 @@ import {DepartmentDto} from '../models/department.model';
   providedIn: 'root',
 })
 export class DoctorDepartmentService {
-  private baseUrl = 'http://localhost:8080';
+  private baseUrl = 'http://localhost:8080/appointments/patient';
 
   constructor(private http: HttpClient) {}
 
