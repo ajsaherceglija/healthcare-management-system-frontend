@@ -52,10 +52,8 @@ export class DoctorAppointmentsComponent implements OnInit {
           ...(response.upcoming || [])
         ];
 
-        // Extract unique patient IDs
         const patientIds = Array.from(new Set(this.appointments.map(appt => appt.patientId)));
 
-        // Fetch and cache patient names
         patientIds.forEach(pid => {
           if (!this.patientNameMap.has(pid)) {
             this.patientService.getPatientById(pid).subscribe({

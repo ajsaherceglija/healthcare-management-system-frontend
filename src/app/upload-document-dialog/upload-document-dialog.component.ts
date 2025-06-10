@@ -31,7 +31,6 @@ export class UploadDocumentDialogComponent {
       return;
     }
 
-    // Instead of FormData, send a plain object since no files
     const documentData = {
       title: this.title,
       content: this.content,
