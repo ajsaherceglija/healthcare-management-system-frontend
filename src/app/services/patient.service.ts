@@ -8,7 +8,7 @@ import { UserDto } from '../models/user.model';
   providedIn: 'root',
 })
 export class PatientService {
-  private baseUrl = 'http://localhost:8080';
+  private baseUrl = 'https://healthcare-management-system-04601a8f10ae.herokuapp.com';
 
   private selectedPatientSubject = new BehaviorSubject<UserDto | null>(null);
   selectedPatient$ = this.selectedPatientSubject.asObservable();

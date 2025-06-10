@@ -7,7 +7,7 @@ import { DocumentDto } from '../models/document.model';
   providedIn: 'root',
 })
 export class DocumentService {
-  private baseUrl = 'http://localhost:8080/documents';
+  private baseUrl = 'https://healthcare-management-system-04601a8f10ae.herokuapp.com/documents';
 
   constructor(private http: HttpClient) {}
 
