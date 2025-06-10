@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {Router, RouterLink} from '@angular/router';
-import {MOCK_USERS} from '../models/user.model';
 import {AuthService} from '../services/auth.service';
 
 @Component({

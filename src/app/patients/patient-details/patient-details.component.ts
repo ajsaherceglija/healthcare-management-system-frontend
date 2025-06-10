@@ -26,7 +26,6 @@ export class PatientDetailsComponent {
     });
   }
 
-  // Add this public method
   closeDialog(): void {
     this.dialogRef.close();
   }
@@ -45,6 +44,6 @@ export class PatientDetailsComponent {
 
   save(): void {
     console.log('Saved diagnoses:', this.patientForm.value.diagnoses);
-    this.closeDialog(); // Use the public method here too
+    this.closeDialog();
   }
 }

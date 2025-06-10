@@ -47,7 +47,6 @@ export class RegisterComponentComponent {
 
     this.authService.register(firstName, lastName, gender, email, password, confirmPassword, address, city, phone, dob, blood_group, jmbg).subscribe({
       next: (response) => {
-        // Navigate to the user's profile or login page after registration
         this.router.navigate([`/user/${response.uid}`]);
       },
       error: (err) => {

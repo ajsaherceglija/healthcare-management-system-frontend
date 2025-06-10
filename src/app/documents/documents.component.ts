@@ -72,7 +72,6 @@ export class DocumentsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((documentData: any | undefined) => {
       if (documentData && this.currentUser) {
-        // Add senderId and isForPatient properties
         documentData.senderId = this.currentUser.uid.toString();
         documentData.isForPatient = true;
 

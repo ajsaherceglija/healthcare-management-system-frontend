@@ -26,7 +26,7 @@ mat-nav-list a:hover {
 mat-nav-list a span{
   font-size: 18px;
   color: #291F1E;
-  font-family: Inter;
+  font-family: "Inter", sans-serif;
 }
 
 mat-nav-list a:hover span,
@@ -53,7 +53,6 @@ mat-nav-list a:hover span,
 ::ng-deep mat-nav-list span{
   font-size: 18px !important;
   color: #291F1E !important;
-  font-family: Inter;
 }
 
 ::ng-deep .logout:hover{
