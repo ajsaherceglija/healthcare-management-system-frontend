@@ -11,11 +11,6 @@ export class DocumentService {
 
   constructor(private http: HttpClient) {}
 
-  getDocumentsForUser(userId: number): Observable<DocumentDto[]> {
-    const headers = this.getAuthHeaders(false);
-    return this.http.get<DocumentDto[]>(`${this.baseUrl}/user/${userId}`, { headers });
-  }
-
   sendDocument(documentData: any): Observable<DocumentDto> {
     const headers = this.getAuthHeaders(true);
     return this.http.post<DocumentDto>(`${this.baseUrl}/send`, documentData, { headers });
@@ -29,7 +24,14 @@ export class DocumentService {
     if (includeJsonContentType) {
       headers = headers.set('Content-Type', 'application/json');
     }
-
     return headers;
   }
+  getSentDocuments(userId: number): Observable<DocumentDto[]> {
+    return this.http.get<DocumentDto[]>(`${this.baseUrl}/user/${userId}?role=doctor`, { headers: this.getAuthHeaders(false) });
+  }
+
+  getReceivedDocuments(userId: number): Observable<DocumentDto[]> {
+    return this.http.get<DocumentDto[]>(`${this.baseUrl}/user/${userId}?role=patient`, { headers: this.getAuthHeaders(false) });
+  }
+
 }

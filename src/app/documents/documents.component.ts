@@ -7,7 +7,6 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { UploadDocumentDialogComponent } from '../upload-document-dialog/upload-document-dialog.component';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-documents',
@@ -38,11 +37,21 @@ export class DocumentsComponent implements OnInit {
 
   loadDocuments(): void {
     if (!this.currentUser) return;
-    this.documentService.getDocumentsForUser(this.currentUser.uid).subscribe({
-      next: (docs) => this.documents = docs,
-      error: (err) => console.error('Failed to load documents', err)
-    });
+
+    if (this.currentUser.role === 'doctor') {
+      this.documentService.getSentDocuments(this.currentUser.uid).subscribe({
+        next: (docs) => this.documents = docs,
+        error: (err) => console.error('Failed to load sent documents', err)
+      });
+    } else if (this.currentUser.role === 'patient') {
+      this.documentService.getReceivedDocuments(this.currentUser.uid).subscribe({
+        next: (docs) => this.documents = docs,
+        error: (err) => console.error('Failed to load received documents', err)
+      });
+    }
   }
+
+
 
   openDocumentModal(doc: DocumentDto) {
     this.selectedDocument = doc;
