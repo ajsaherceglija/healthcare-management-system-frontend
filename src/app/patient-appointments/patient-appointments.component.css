@@ -27,9 +27,13 @@ h1 {
   border-radius: 16px;
   height: 200px;
   width: 200px;
-  background-color: #CCCEE0;
+  background-color: rgba(43, 80, 170, 0.5);
   font-size: 24px;
   color: #291F1E;
+}
+
+.appointment-container.upcoming {
+  background-color: rgba(43, 80, 170, 0.2);
 }
 
 .schedule-btn-div {

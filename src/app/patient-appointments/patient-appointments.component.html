@@ -2,11 +2,17 @@
 <div class="main-container">
   <h1>My appointments</h1>
   <div class="appointments-div">
-    <div class="appointment-container" *ngFor="let appointment of appointments" (click)="openDetails(appointment)">
+    <div
+      class="appointment-container"
+      [class.upcoming]="appointment.status === 'upcoming'"
+      *ngFor="let appointment of appointments"
+      (click)="openDetails(appointment)"
+    >
       <p class="appointments-text">{{ appointment.date ? (appointment.date | date: 'yyyy-MM-dd') : 'TBA' }}</p>
-      <p class="appointments-text">{{ appointment.date ? (appointment.date | date: 'HH:mm') : 'TBA' }}</p>
+      <p class="appointments-text">{{ appointment.time ? (appointment.time.slice(0, 5)) : 'TBA' }}</p>
       <p class="appointments-text">{{ appointment.status }}</p>
     </div>
+
   </div>
   <div class="schedule-btn-div">
     <button type="button" class="schedule-btn" (click)="openModal()">+ Schedule a new appointment</button>

@@ -14,7 +14,7 @@
     </div>
     <div class="line-div">
       <p>Time</p>
-      <p>{{appointment.date  | date: 'HH:mm'}}</p>
+      <p>{{ appointment.time ? (appointment.time.slice(0, 5)) : 'TBA' }}</p>
     </div>
     <div class="line-div">
       <p>Room</p>

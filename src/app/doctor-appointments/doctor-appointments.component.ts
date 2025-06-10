@@ -7,7 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppointmentService } from '../services/appointment.service';
-import { PatientService } from '../services/patient.service';  // <-- Use PatientService now
+import { PatientService } from '../services/patient.service';
 
 @Component({
   selector: 'app-doctor-appointments',
@@ -26,14 +26,14 @@ export class DoctorAppointmentsComponent implements OnInit {
   selectedTime: string = '';
   selectedRoom: string = '';
 
-  // Map patientId => patientName
+
   patientNameMap = new Map<number, string>();
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private appointmentService: AppointmentService,
-    private patientService: PatientService  // <-- inject PatientService
+    private patientService: PatientService
   ) {}
 
   ngOnInit(): void {
