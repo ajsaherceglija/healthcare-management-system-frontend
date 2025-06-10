@@ -1,8 +1,16 @@
 <div class="header-row">
   <h2>My Documents</h2>
-  <button class="upload-btn" #uploadBtn (click)="openUploadDialog(uploadBtn)">
+  <button
+    class="upload-btn"
+    *ngIf="currentUser && currentUser.role === 'doctor'"
+    #uploadBtn
+    (click)="openUploadDialog(uploadBtn)"
+  >
     Upload New Document
   </button>
+
+
+
 </div>
 
 <ul>
